@@ -11,7 +11,7 @@ const UsersSchema = new mongoose.Schema({
     ],
   },
 
-  password: {},
+  password: String,
   favourites: {
     type: Array,
   },

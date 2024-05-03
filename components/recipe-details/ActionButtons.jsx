@@ -3,6 +3,7 @@ import { updateUserFav } from "@/app/actions/userActions";
 import useAuth from "@/app/hooks/useAuth";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function ActionButtons({ id }) {
   const { auth, setAuth } = useAuth();
@@ -16,7 +17,7 @@ export default function ActionButtons({ id }) {
       await updateUserFav(id, auth?._id);
       setFavourite(!favourite);
     } else {
-      alert("Please login first");
+      Swal.fire("Please login first");
       router.push("/login");
     }
   };
@@ -29,10 +30,10 @@ export default function ActionButtons({ id }) {
           navigator.share({ url });
         }
       } catch (err) {
-        alert("Can not share !");
+        Swal.fire("Can not share !");
       }
     } else {
-      alert("Please login first !!");
+      Swal.fire("Please login first !!");
       router.push("/login");
     }
   };

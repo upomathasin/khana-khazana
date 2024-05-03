@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-export default function LoginForm() {
+export default async function LoginForm() {
   const { auth, setAuth } = useAuth();
   const router = useRouter();
   const [error, setError] = useState(null);
@@ -36,9 +36,9 @@ export default function LoginForm() {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: `${err.message}`,
+        text: `Invalid email or password`,
       });
-      setError(err.message);
+      setError("Invalid email or password !");
     }
   };
   return (

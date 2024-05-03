@@ -24,7 +24,6 @@ export async function registerAction(formData) {
 
 export async function updateUserFav(recipeId, authId) {
   try {
-    console.log("Update");
     await connectMongo();
     const user = await userModel.findById(authId);
 
@@ -41,12 +40,16 @@ export async function updateUserFav(recipeId, authId) {
 }
 
 export async function loginAction(query) {
-  await connectMongo();
-  const user = await userModel.findOne(query).lean();
-  if (user) {
-    return user;
-  } else
-    throw new Error(
-      `User with email (${query?.email}) or password is invalid.`
-    );
+  try {
+    await connectMongo();
+    const user = await userModel.findOne(query).lean();
+    if (user) {
+      return user;
+    } else
+      throw new Error(
+        `User with email (${query?.email}) or password is invalid.`
+      );
+  } catch (err) {
+    throw new Error("Invalid input !");
+  }
 }

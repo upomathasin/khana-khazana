@@ -28,8 +28,8 @@ export async function getAllRecipeById(id) {
 }
 
 export async function getAllRecipeByCategory(category) {
+  await connectMongo();
   try {
-    await connectMongo();
     const recipes = await recipeModel.find({ category: category }).lean();
     if (recipes.length) {
       return recipes;
