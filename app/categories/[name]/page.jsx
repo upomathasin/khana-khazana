@@ -23,7 +23,7 @@ export default async function CategoryPage({ params: { name } }) {
         <div>
           <h3 class="font-semibold text-xl">{selectedCategory(name)}</h3>
 
-          {recipes.length ? (
+          {recipes?.length ? (
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-8 justify-items-center">
               {recipes?.map((recipe) => (
                 <RecipeCard

@@ -30,13 +30,12 @@ export async function getAllRecipeById(id) {
 export async function getAllRecipeByCategory(category) {
   try {
     await connectMongo();
-    console.log(category);
-
     const recipes = await recipeModel.find({ category: category }).lean();
     if (recipes.length) {
-      console.log(" Categoris based food", recipes);
       return recipes;
-    } else return null;
+    } else {
+      return null;
+    }
   } catch (err) {
     throw err;
   }
