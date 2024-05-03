@@ -26,7 +26,10 @@ export default async function CategoryPage({ params: { name } }) {
           {recipes.length ? (
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-8 justify-items-center">
               {recipes?.map((recipe) => (
-                <RecipeCard recipe={recipe}></RecipeCard>
+                <RecipeCard
+                  key={recipe._id.toString()}
+                  recipe={recipe}
+                ></RecipeCard>
               ))}
             </div>
           ) : (

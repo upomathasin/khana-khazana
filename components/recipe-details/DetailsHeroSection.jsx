@@ -1,13 +1,15 @@
 import React from "react";
 import ActionButtons from "./ActionButtons";
-
+import Image from "next/image";
 export default function DetailsHeroSection({ recipe }) {
   return (
     <section>
       <div className="grid grid-cols-12 container gap-8 justify-items-center">
         <div className="col-span-12 md:col-span-6">
-          <img
+          <Image
             src={recipe.thumbnail}
+            width={300}
+            height={160}
             alt=""
             className="w-full h-full rounded-lg object-contain"
           />
