@@ -1,22 +1,13 @@
+"use server";
 import { connectMongo } from "@/dbConnect/connectMongo";
 import { userModel } from "@/models/user-model";
+import { performLogin, performRegistration } from "../qeries";
 
 export async function registerAction(formData) {
   try {
-    const fname = formData.get("fname");
-    const lname = formData.get("lname");
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const userData = { fname, lname, email, password };
-    await connectMongo();
-    const user = await userModel.findOne({ email: email }).lean();
-    if (user) {
-      throw new Error(`User with this email (${email}) already exists.`);
-    } else {
-      await new userModel(userData).save();
-    }
-  } catch (err) {
-    throw err;
+    await performRegistration(formData);
+  } catch (er) {
+    throw er;
   }
 }
 
@@ -40,7 +31,7 @@ export async function updateUserFav(recipeId, authId) {
 export async function loginAction(query) {
   try {
     await connectMongo();
-    const user = await userModel.findOne(query).lean();
+    const user = await performLogin(query);
     if (user) {
       return user;
     } else
