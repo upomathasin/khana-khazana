@@ -1,7 +1,6 @@
 import { connectMongo } from "@/dbConnect/connectMongo";
 import { recipeModel } from "@/models/recipe-model";
 import mongoose from "mongoose";
-import { selectedCategory } from "../utils";
 
 export async function getAllRecipes() {
   try {
@@ -33,8 +32,8 @@ export async function getAllRecipeByCategory(category) {
     await connectMongo();
     console.log(category);
 
+    const recipes = await recipeModel.find({ category: category }).lean();
     if (recipes.length) {
-      const recipes = await recipeModel.find({ category: category }).lean();
       console.log(" Categoris based food", recipes);
       return recipes;
     } else return null;
