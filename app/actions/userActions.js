@@ -1,5 +1,3 @@
-"use server";
-
 import { connectMongo } from "@/dbConnect/connectMongo";
 import { userModel } from "@/models/user-model";
 
